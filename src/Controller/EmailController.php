@@ -58,8 +58,8 @@ class EmailController extends AbstractController {
                 ]);*/
 
             $email = (new Email())
-            ->from('simonbelete@gmail.com')
-            ->to('simonbelete@gmail.com')
+            ->from('admin@localhost')
+            ->to('admin@localhost')
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
