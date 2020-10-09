@@ -1,0 +1,11 @@
+# FROM php:8.0-rc-fpm-alpine AS production
+
+FROM composer:2.0 AS development
+
+# Create app directory
+ENV WORK_DIR /usr/src/app
+WORKDIR ${WORK_DIR}
+
+COPY . ./
+
+CMD symfony server:start
