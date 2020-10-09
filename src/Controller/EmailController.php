@@ -17,8 +17,12 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 /**
  * Class EmailController
@@ -30,17 +34,48 @@ use Symfony\Component\HttpFoundation\Response;
  * @copyright (C) Guya
  * @version  1.0.0
  */
-class EmailController {
+class EmailController extends AbstractController {
     /**
      * @param Request $request
      * @return JsonResponse
      * @throws \Exception
      * @Route("/emails", name="send_email", method={"POST"})
      */
-    public function sendEmail(Request $request){
+    public function sendEmail(Request $request, MailerInterface $mailer){
         try{
+            // Parse requests
+            // Validate if request containes values
+            if(!$request || $request->get('type'))
+                throw new \Exception();
+            
+            /*$email = (new Email())
+                ->from('account@guya.com')
+                ->to($request->get('simonbelete@gmail.com'))
+                ->subject('Guya Account')
+                ->htmlTemplate('templates/email/password-reset.html.en.twig')
+                ->context([
+                    'username' => 'Test user'
+                ]);*/
 
-        }catch (\Exception $ex){
+            $email = (new Email())
+            ->from('simonbelete@gmail.com')
+            ->to('simonbelete@gmail.com')
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('Time for Symfony Mailer!')
+            ->text('Sending emails is fun again!')
+            ->html('<p>See Twig integration for better HTML integration!</p>');
+
+            $mailer->send($email);
+
+            return new Response("mailed");
+
+        } catch (TransportExceptionInterface $ex) {
+            // Email Sending failer
+            return new Response($ex);
+        } catch (\Exception $ex){
             $res = [
                 'status_code' => 422,
                 'status' => 'Unprocessable',
@@ -49,12 +84,8 @@ class EmailController {
                     'message' => 'Data not valid'
                 ]
             ];
-            return $this->response($res, 422);
+            return new Response($ex);
         }
-    }
-
-    public function index(): Response{
-        return new Response( '<p>Hello</p>' );
     }
 }
 
