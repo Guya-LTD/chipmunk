@@ -19,10 +19,11 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 /**
  * Class EmailController
@@ -36,6 +37,27 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
  */
 class EmailController extends AbstractController {
     /**
+     * @param string $to
+     * @return \Email
+     */
+    public function getPasswordResetEmail(Request $request){
+        $email = (new TemplatedEmail())
+            ->from($_SERVER['ACCOUNT_SENDER_EMAIL'])
+            ->to($request->get('to'))
+            ->subject('Guya Account')
+            ->htmlTemplate('emails/password-reset-en.html.twig')
+            ->context([
+                'name' => $request->get('name'),
+                'action_url' => $request->get('action_url'),
+                'operating_system' => $request->get('operating_system'),
+                'browser_name' => $request->get('browser_name'),
+                'support_url' => $request->get('support_url')
+            ]);
+
+        return $email;
+    }
+
+    /**
      * @param Request $request
      * @return JsonResponse
      * @throws \Exception
@@ -45,46 +67,47 @@ class EmailController extends AbstractController {
         try{
             // Parse requests
             // Validate if request containes values
-            if(!$request || $request->get('type'))
-                throw new \Exception();
+            if(!$request || $request->get('type') == null || $request->get('to') == null)
+                throw new \Exception("Pyaload is Empyt");
             
-            /*$email = (new Email())
-                ->from('account@guya.com')
-                ->to($request->get('simonbelete@gmail.com'))
-                ->subject('Guya Account')
-                ->htmlTemplate('templates/email/password-reset.html.en.twig')
-                ->context([
-                    'username' => 'Test user'
-                ]);*/
+            if($request->get('type') == 'reset-password')
+                $mailer->send(
+                    $this->getPasswordResetEmail($request)
+                );
 
-            $email = (new Email())
-            ->from('admin@localhost')
-            ->to('admin@localhost')
-            //->cc('cc@example.com')
-            //->bcc('bcc@example.com')
-            //->replyTo('fabien@example.com')
-            //->priority(Email::PRIORITY_HIGH)
-            ->subject('Time for Symfony Mailer!')
-            ->text('Sending emails is fun again!')
-            ->html('<p>See Twig integration for better HTML integration!</p>');
+            $res = [
+                'status_code' => 201,
+                'status' => 'Created',
+                'message' => 'Mail Sent'
+            ];
 
-            $mailer->send($email);
-
-            return new Response("mailed");
+            return new JsonResponse($res, 201);
 
         } catch (TransportExceptionInterface $ex) {
+            print($ex);
             // Email Sending failer
-            return new Response($ex);
-        } catch (\Exception $ex){
             $res = [
                 'status_code' => 422,
                 'status' => 'Unprocessable',
+                'message' => 'Mailer Exception',
                 'error' => [
-                    'type' => 'Exception',
-                    'message' => 'Data not valid'
+                    'type' => 'TransportExceptionInterface',
+                    'message' => $ex
                 ]
             ];
-            return new Response($ex);
+            return new JsonResponse($res, 500);
+        } catch (\Exception $ex){
+            print($ex);
+            $res = [
+                'status_code' => 500,
+                'status' => 'Unprocessable',
+                'message' => 'General Exception',
+                'error' => [
+                    'type' => 'Exception',
+                    'message' => $ex
+                ]
+            ];
+            return new JsonResponse($res, 500);
         }
     }
 }
