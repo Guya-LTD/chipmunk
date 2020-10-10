@@ -8,4 +8,4 @@ WORKDIR ${WORK_DIR}
 
 COPY . ./
 
-CMD symfony server:start
+CMD symfony server:start -p 5000

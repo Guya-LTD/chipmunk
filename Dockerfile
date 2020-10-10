@@ -10,4 +10,4 @@ COPY . ./
 
 RUN composer install
 
-CMD symfony server:start
+CMD symfony server:start -p 5000
