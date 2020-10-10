@@ -37,7 +37,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class EmailController extends AbstractController {
     /**
-     * @param string $to
+     * @param Request $request
      * @return \Email
      */
     public function getPasswordResetEmail(Request $request){
