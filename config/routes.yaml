@@ -1,8 +1,0 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
-send_email:
-    path: /api/v1/emails
-    controller: App\Controller\EmailController::sendEmail
-    methods: POST
