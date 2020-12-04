@@ -15,11 +15,11 @@
  * @last modified time: 2020-05-13T04:32:15+03:00
  */
 
-namespace Chipmunk\Repositgory;
+namespace Chipmunk\Message\Consumer;
 
 /**
- * Interface RabbitMQInterface
- * @package Xpress\Domain\Service\Repository
+ * Interface ConsumerInterface
+ * @package Chipmunk\Repository
  * @see https://github.com/Simonbelete/guya/tree/develop/xpress
  * @author Simon Belete <simonbelete@gmail.com> 
  * @license UNLICENSED
@@ -27,19 +27,6 @@ namespace Chipmunk\Repositgory;
  * @version  1.0.0
  */
 
-interface RabbitMQInterface {
-    public function setHost( string $host );
-    public function setPort( string $port );
-    public function setUsername( string $username );
-    public function setPassword( string $password );
-    public function connect();
-    public function initChannel();
-    public function waitingMessage();
-    public function recivedMessage( string $msg );
-    public function channel( string $publishName );
-    public function closeChannel();
-    public function closeConnection();
-    public function close();
+interface ConsumerInterface {
+    public function consume();
 }
-
-/** EOF */
