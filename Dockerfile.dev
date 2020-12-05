@@ -8,4 +8,6 @@ WORKDIR ${WORK_DIR}
 
 COPY . ./
 
-CMD symfony server:start -p 5000
+RUN ls
+
+CMD php -S 0.0.0.0:5000 -t public
