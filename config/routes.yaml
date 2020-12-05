@@ -2,6 +2,11 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+welcome_email:
+    path: /api/v1/emails/send/welcome
+    controller: App\Controller\WelcomeEmailController::sendEmail
+    methods: POST
+
 send_email:
     path: /api/v1/emails
     controller: App\Controller\EmailController::sendEmail
