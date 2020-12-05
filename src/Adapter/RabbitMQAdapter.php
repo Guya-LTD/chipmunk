@@ -107,7 +107,8 @@ class RabbitMQAdapter implements RabbitMQInterface {
                 $this->host,
                 $this->port,
                 $this->username,
-                $this->password
+                $this->password,
+                "/"
             );
         } catch ( Exception $ex ){
             echo "Rabbitmq Connection Error: {$ex}";

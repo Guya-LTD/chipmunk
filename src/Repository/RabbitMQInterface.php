@@ -15,7 +15,7 @@
  * @last modified time: 2020-05-13T04:32:15+03:00
  */
 
-namespace Chipmunk\Repositgory;
+namespace Chipmunk\Repository;
 
 /**
  * Interface RabbitMQInterface
@@ -29,14 +29,14 @@ namespace Chipmunk\Repositgory;
 
 interface RabbitMQInterface {
     public function setHost( string $host );
-    public function setPort( string $port );
+    public function setPort( int $port );
     public function setUsername( string $username );
     public function setPassword( string $password );
     public function connect();
     public function initChannel();
-    public function waitingMessage();
+    public function waitingMessage( $name );
     public function recivedMessage( string $msg );
-    public function channel( string $publishName );
+    //public function channel( string $publishName );
     public function closeChannel();
     public function closeConnection();
     public function close();

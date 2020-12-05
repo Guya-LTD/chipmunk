@@ -28,17 +28,17 @@ namespace Chipmunk\Repository;
  */
 
 interface MailerInterface {
-    public function setDebug ( $debug );
-    public function setHost ( $host );
-    public function setUsername ( $username );
-    public function setPassword ( $password );
-    public function setSecurity ( $security );
-    public function setPort ( $port );
-    public function from( $from );
-    public function to( $to );
-    public function isHTML( $isHtml );
-    public function subject ( $subject );
-    public function body ( $body );
+    public function setDebug ( string $debug );
+    public function setHost ( string $host );
+    public function setUsername ( string $username );
+    public function setPassword ( string $password );
+    public function setSecurity ( string $security );
+    public function setPort ( int $port );
+    public function from( string $from );
+    public function to( string $to );
+    public function isHTML( bool $isHtml );
+    public function subject ( string $subject );
+    public function body ( string $body );
     public function initSMTP ();
     public function send();
 }

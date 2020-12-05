@@ -15,7 +15,7 @@
  * @last modified time: 2020-05-13T04:32:15+03:00
  */
 
-namespace Chipmunk\Adapter;
+namespace Chipmunk\Factory;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -38,12 +38,12 @@ class MailerFactory implements MailerFactoryInterface {
     public function createWithConnection() {
         // Object Variables
         $debug = SMTP::DEBUG_SERVER;
-        $host = Environment::get($this->ENV_HOST_NAME);
+        $host = Environment::get($this::ENV_HOST_NAME);
         $smtpAuth = true;
-        $username = Environment::get($this->ENV_USERNAME_NAME);
-        $password = Environment::get($this->ENV_PASSWORD_NAME);
+        $username = Environment::get($this::ENV_USERNAME_NAME);
+        $password = Environment::get($this::ENV_PASSWORD_NAME);
         $security = PHPMailer::ENCRYPTION_STARTTLS;
-        $port = Environment::get($this->ENV_PORT_NAME);
+        $port = Environment::get($this::ENV_PORT_NAME);
         
         // Create MailerAdaper Object
         $mailerAdapter = new MailerAdapter(true);

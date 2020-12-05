@@ -18,6 +18,7 @@
 namespace Chipmunk\Factory;
 
 use Chipmunk\Helper\Environment;
+use Chipmunk\Adapter\RabbitMQAdapter;
 use Chipmunk\Factory\RabbitMQFactoryInterface;
 
 /**
@@ -33,11 +34,16 @@ use Chipmunk\Factory\RabbitMQFactoryInterface;
 class RabbitMQFactory implements RabbitMQFactoryInterface {
     public function createWithConnection() {
         // Object Variables
-        $host = Environment::get($this->ENV_HOST_NAME);
-        $port = Environment::get($this->ENV_PORT_NAME);
-        $username = Environment::get($this->ENV_USERNAME_NAME);
-        $password = Environment::get($this->ENV_PASSWORD_NAME);
-
+        $host = Environment::get($this::ENV_RABBITMQ_HOST_NAME);
+        $port = Environment::get($this::ENV_RABBITMQ_PORT_NAME);
+        $username = Environment::get($this::ENV_RABBITMQ_USERNAME_NAME);
+        $password = Environment::get($this::ENV_RABBITMQ_PASSWORD_NAME);
+        /*
+        $host = "asdf";
+        $port = "5672";
+        $username = "rabbitmq_user";
+        $password = "0875e68ce5";
+        */
         // Create RabbitmqAdaper Object
         $rabbitMQAdapter = new RabbitMQAdapter();
         $rabbitMQAdapter->setHost($host)

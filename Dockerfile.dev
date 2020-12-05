@@ -1,11 +1,38 @@
 # FROM php:8.0-rc-fpm-alpine AS production
 
-FROM composer:2.0 AS development
+#FROM php:8.0.0rc1-alpine AS development
+
+#RUN docker-php-ext-install sockets
 
 # Create app directory
+#ENV WORK_DIR /usr/src/app
+#WORKDIR ${WORK_DIR}
+
+#COPY . .
+
+#CMD php public/index.php
+
+
+#FROM php:8.0-apache AS development
+
+#RUN docker-php-ext-install sockets
+
+#COPY vhost.conf /etc/apache2/sites-available/000-default.conf
+
+#ENV WORK_DIR /usr/src/app
+#WORKDIR ${WORK_DIR}
+
+#COPY . .
+
+#RUN chown -R www-data:www-data ./public && a2enmod rewrite
+
+#RUN chmod 777 -R ./public
+
+FROM php:8.0 AS development
+
 ENV WORK_DIR /usr/src/app
 WORKDIR ${WORK_DIR}
 
-COPY . ./
+COPY . .
 
-CMD php public/index.php -p 5000
+CMD php public/index.php

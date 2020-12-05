@@ -138,7 +138,7 @@ class MailerAdapter implements MailerInterface {
      * @param string $username
      * @return $this
      */
-    public function setUsername ( stirng $username ) : self {
+    public function setUsername ( string $username ) : self {
         $this->username = $username;
         return $this;
     }
