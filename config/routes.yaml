@@ -7,6 +7,11 @@ welcome_email:
     controller: App\Controller\WelcomeEmailController::sendEmail
     methods: POST
 
+invoice_email:
+    path: /api/v1/emails/send/invoice
+    controller: App\Controller\InvoiceEmailController::sendEmail
+    methods: POST
+
 send_email:
     path: /api/v1/emails
     controller: App\Controller\EmailController::sendEmail

@@ -453,7 +453,7 @@
                     <td class="content-cell">
                       <div class="f-fallback">
                         <h1>Hi {{name}},</h1>
-                        <p>Thanks for using [Product Name]. This is an invoice for your recent purchase.</p>
+                        <p>Thanks for using Guya. This is an invoice for your recent purchase.</p>
                         <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
                             <td class="attributes_content">
@@ -461,7 +461,7 @@
                                 <tr>
                                   <td class="attributes_item">
                                     <span class="f-fallback">
-              <strong>Amount Due:</strong> {{total}}
+              <strong>Amount Due:</strong> {{total}}Birr
             </span>
                                   </td>
                                 </tr>
@@ -495,7 +495,7 @@
                         <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
                           <tr>
                             <td>
-                              <h3>{{invoice_id}}</h3>
+                              <h3>INV# - {{invoice_id}}</h3>
                             </td>
                             <td>
                               <h3 class="align-right">{{date}}</h3>
@@ -512,22 +512,22 @@
                                     <p class="f-fallback">Amount</p>
                                   </th>
                                 </tr>
-                                {{#each invoice_details}}
+                                {% for key,value in invoice_details %}
                                 <tr>
                                   <td width="80%" class="purchase_item">
-                                    <div class="f-fallback">{{description}}</div>
-                                    <div class="f-fallback mod-description">QTY/HR RATE - {{quantity}}</div>
-                                    <div class="f-fallback mod-description" style="padding-top: 7px;">UNIT COST - {{unit_price}}Birr</div>
+                                    <div class="f-fallback">{{value.description}}</div>
+                                    <div class="f-fallback mod-description">QTY/HR RATE - {{value.quantity}}</div>
+                                    <div class="f-fallback mod-description" style="padding-top: 7px;">UNIT COST - {{value.unit_price}}Birr</div>
                                   </td>
-                                  <td class="align-right" width="20%" class="purchase_item"><span class="f-fallback">{{amount}}</span></td>
+                                  <td class="align-right" width="20%" class="purchase_item"><span class="f-fallback">{{value.amount}}</span></td>
                                 </tr>
-                                {{/each}}
+                                {% endfor %}
                                 <tr>
                                   <td width="80%" class="purchase_footer" valign="middle">
                                     <p class="f-fallback purchase_total purchase_total--label">Subtotal</p>
                                   </td>
                                   <td width="20%" class="purchase_footer" valign="middle">
-                                    <p class="f-fallback purchase_total">{{subtotal}}</p>
+                                    <p class="f-fallback purchase_total">{{subtotal}}Birr</p>
                                   </td>
                                 </tr>
                                 <tr>
@@ -535,7 +535,7 @@
                                     <p class="f-fallback purchase_total purchase_total--label">Discount</p>
                                   </td>
                                   <td width="20%" class="purchase_footer" valign="middle">
-                                    <p class="f-fallback purchase_total">{{discount}}</p>
+                                    <p class="f-fallback purchase_total">{{discount}}Birr</p>
                                   </td>
                                 </tr>
                                 <tr>
@@ -543,7 +543,7 @@
                                     <p class="f-fallback purchase_total purchase_total--label">(Tax Rate)</p>
                                   </td>
                                   <td width="20%" class="purchase_footer" valign="middle">
-                                    <p class="f-fallback purchase_total">{{tax_rate}}</p>
+                                    <p class="f-fallback purchase_total">{{tax_rate}}%</p>
                                   </td>
                                 </tr>
                                 <tr>
@@ -551,7 +551,7 @@
                                     <p class="f-fallback purchase_total purchase_total--label">Tax</p>
                                   </td>
                                   <td width="20%" class="purchase_footer" valign="middle">
-                                    <p class="f-fallback purchase_total">{{tax}}</p>
+                                    <p class="f-fallback purchase_total">{{tax}}Birr</p>
                                   </td>
                                 </tr>
                                 <tr>
@@ -559,7 +559,7 @@
                                     <p class="f-fallback purchase_total purchase_total--label">Total</p>
                                   </td>
                                   <td width="20%" class="purchase_footer" valign="middle">
-                                    <p class="f-fallback purchase_total">{{total}}</p>
+                                    <p class="f-fallback purchase_total">{{total}}Birr</p>
                                   </td>
                                 </tr>
                               </table>
