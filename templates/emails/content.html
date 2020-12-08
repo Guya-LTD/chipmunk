@@ -423,15 +423,15 @@
   <![endif]-->
   </head>
   <body>
-    <span class="preheader">Thanks for trying out Guya. We’ve pulled together some information and resources to help you get started.</span>
+    <span class="preheader">We received a request to reset your password with this email address. ({{email_address}})</span>
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
       <tr>
         <td align="center">
           <table class="email-content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
             <tr>
               <td class="email-masthead">
-                <a href="https://127.0.0.1:50000/admin-panel" class="f-fallback email-masthead_name">
-                  <img src="./images/guya-shop-white.png" width="150px" alt="Guya Shop Logo" />
+                <a href="https://example.com" class="f-fallback email-masthead_name">
+                Guya
               </a>
               </td>
             </tr>
@@ -443,8 +443,8 @@
                   <tr>
                     <td class="content-cell">
                       <div class="f-fallback">
-                        <h1>Welcome, {{name}}!</h1>
-                        <p>Thanks for trying Guya. We’re thrilled to have you on board. To get the most out of Guya, do this primary next step:</p>
+                        <p>We received a request to reset the password to access Guya with your email address ({{email_address}}) from a {{operating_system}} device using {{browser_name}}, but we were unable to find an account associated with this address.</p>
+                        <p>If you use Guya and were expecting this email, consider trying to request a password reset using the email address associated with your account.</p>
                         <!-- Action -->
                         <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
@@ -454,40 +454,16 @@
                               <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                 <tr>
                                   <td align="center">
-                                    <a href="{{action_url}}" class="f-fallback button" target="_blank">Do this Next</a>
+                                    <a href="{{action_url}}" class="f-fallback button button--blue" target="_blank">Try a different email</a>
                                   </td>
                                 </tr>
                               </table>
                             </td>
                           </tr>
                         </table>
-                        <p>For reference, here's your login information:</p>
-                        <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                          <tr>
-                            <td class="attributes_content">
-                              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                                <tr>
-                                  <td class="attributes_item">
-                                    <span class="f-fallback">
-              <strong>Login Page:</strong> {{login_url}}
-            </span>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="attributes_item">
-                                    <span class="f-fallback">
-              <strong>Username:</strong> {{username}}
-            </span>
-                                  </td>
-                                </tr>
-                              </table>
-                            </td>
-                          </tr>
-                        </table>
-                        <p>If you have any questions, feel free to <a href="mailto:{{support_email}}">email our customer success team</a>. (We're lightning quick at replying.) We also offer <a href="{{live_chat_url}}">live chat</a> during business hours.</p>
+                        <p>If you do not use Guya or did not request a password reset, please ignore this email or <a href="{{support_url}}">contact support</a> if you have questions.</p>
                         <p>Thanks,
-                          <br>[Sender Name] and the Guya Team</p>
-                        <p><strong>P.S.</strong> Need immediate help getting started? Check out our <a href="{{help_url}}">help documentation</a>. Or, just reply to this email, the Guya support team is always ready to help!</p>
+                          <br>The Guya Team</p>
                         <!-- Sub copy -->
                         <table class="body-sub" role="presentation">
                           <tr>
@@ -508,7 +484,7 @@
                 <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                   <tr>
                     <td class="content-cell" align="center">
-                      <p class="f-fallback sub align-center">&copy; 2019 Guya. All rights reserved.</p>
+                      <p class="f-fallback sub align-center">&copy; 2020 Guya. All rights reserved.</p>
                       <p class="f-fallback sub align-center">
                         Guya, LTD
                         <br>1234 Street Rd.

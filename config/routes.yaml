@@ -12,6 +12,15 @@ invoice_email:
     controller: App\Controller\InvoiceEmailController::sendEmail
     methods: POST
 
+password_reset_email:
+    path: /api/v1/emails/send/password-reset
+    controller: App\Controller\PasswordEmailController::sendEmail
+    methods: POST
+
+password_reset_helper_email:
+    path: /api/v1/emails/send/password-reset-help
+    controller: App\Controller\PasswordHelpController::sendEmail
+
 send_email:
     path: /api/v1/emails
     controller: App\Controller\EmailController::sendEmail

@@ -8,6 +8,4 @@ WORKDIR ${WORK_DIR}
 
 COPY . ./
 
-RUN ls
-
 CMD php -S 0.0.0.0:5000 -t public
