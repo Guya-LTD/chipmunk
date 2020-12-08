@@ -68,7 +68,7 @@ class PasswordHelpEmailController extends AbstractController {
                   ->htmlTemplate('emails/password-reset-help-en.html.twig')
                   ->context([
                       'name' => $params['name'],
-                      'email_address' => $params['email_address'],
+                      'email_address' => $params['to'],
                       'operating_system' => $params['operating_system'],
                       'browser_name' => $params['browser_name'],
                       'action_url' => 'http://127.0.0.1:50000/admin-panel/password-reset',
