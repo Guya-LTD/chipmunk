@@ -68,7 +68,7 @@ class InvoiceEmailController extends AbstractController {
             $email = new TemplatedEmail();
             $email->from($_SERVER['ACCOUNT_SENDER_EMAIL'])
                   ->to($params['to'])
-                  ->subject('Guya Account')
+                  ->subject('Guya Shop, Invoice')
                   ->htmlTemplate('emails/invoice-en.html.twig')
                   ->context([
                       'name' => $params['name'],

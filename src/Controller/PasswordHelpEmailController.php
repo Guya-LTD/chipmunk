@@ -64,7 +64,7 @@ class PasswordHelpEmailController extends AbstractController {
             $email = new TemplatedEmail();
             $email->from($_SERVER['ACCOUNT_SENDER_EMAIL'])
                   ->to($params['to'])
-                  ->subject('Guya Account')
+                  ->subject('Guya Account, Password Reset Failed')
                   ->htmlTemplate('emails/password-reset-help-en.html.twig')
                   ->context([
                       'name' => $params['name'],
