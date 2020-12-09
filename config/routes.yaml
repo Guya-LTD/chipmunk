@@ -20,6 +20,12 @@ password_reset_email:
 password_reset_helper_email:
     path: /api/v1/emails/send/password-reset-help
     controller: App\Controller\PasswordHelpEmailController::sendEmail
+    methods: POST
+
+receipt_email:
+    path: /api/v1/emails/send/receipt
+    controller: App\Controller\ReceiptEmailController::sendEmail
+    methods: POST
 
 send_email:
     path: /api/v1/emails
