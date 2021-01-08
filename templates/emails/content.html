@@ -432,15 +432,15 @@
   <![endif]-->
   </head>
   <body>
-    <span class="preheader">This is a receipt for your recent purchase on {{ purchase_date }}. No payment is due with this receipt.</span>
+    <span class="preheader">This is an invoice for your purchase on {{ purchase_date }}. Please submit payment by {{ due_date }}</span>
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
       <tr>
         <td align="center">
           <table class="email-content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
             <tr>
               <td class="email-masthead">
-                <a href="https://example.com" class="f-fallback email-masthead_name">
-                Guya
+                <a href="https://127.0.0.1:50000/admin-panel" class="f-fallback email-masthead_name">
+                  <img src="./images/guya-shop-white.png" width="150px" alt="Guya Shop Logo" />
               </a>
               </td>
             </tr>
@@ -453,34 +453,53 @@
                     <td class="content-cell">
                       <div class="f-fallback">
                         <h1>Hi {{name}},</h1>
-                        <p>Thanks for using Guya. This email is the receipt for your purchase. No payment is due.</p>
-                        <!--<p>This purchase will appear as “[Credit Card Statement Name]” on your credit card statement for your {{credit_card_brand}} ending in {{credit_card_last_four}}. Need to <a href="{{billing_url}}">update your payment information</a>?</p>-->
-                        <!-- Discount -->
-                        {% if discount is defined %}
-                        <table class="discount" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                        <p>Thanks for using Guya. This is an invoice for your recent purchase.</p>
+                        <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
-                            <td align="center">
-                              <h1 class="f-fallback discount_heading">10% off your next purchase!</h1>
-                              <p class="f-fallback discount_body">Thanks for your support! Here's a coupon for 10% off your next purchase if used by {{expiration_date}}.</p>
-                              <!-- Border based button
-           https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->
-                              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+                            <td class="attributes_content">
+                              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                 <tr>
-                                  <td align="center">
-                                    <a href="http://example.com" class="f-fallback button button--green" target="_blank">Use this discount now...</a>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>Amount Due:</strong> {{total}}Birr
+            </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>Due By:</strong> {{due_date}}
+            </span>
                                   </td>
                                 </tr>
                               </table>
                             </td>
                           </tr>
                         </table>
-                        {% endif %}
-                        <table class="purchase" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                        <!-- Action -->
+                        <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                          <tr>
+                            <td align="center">
+                              <!-- Border based button
+           https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+                                <tr>
+                                  <td align="center">
+                                    <a href="{{action_url}}" class="f-fallback button button--green" target="_blank">Pay Invoice</a>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
                           <tr>
                             <td>
-                              <h3>RCPT# - {{receipt_id}}</h3></td>
+                              <h3>INV# - {{invoice_id}}</h3>
+                            </td>
                             <td>
-                              <h3 class="align-right">{{date}}</h3></td>
+                              <h3 class="align-right">{{date}}</h3>
+                            </td>
                           </tr>
                           <tr>
                             <td colspan="2">
@@ -493,10 +512,10 @@
                                     <p class="f-fallback">Amount</p>
                                   </th>
                                 </tr>
-                                {% for key,value in receipt_details %}
+                                {% for key,value in invoice_details %}
                                 <tr>
                                   <td width="80%" class="purchase_item">
-                                    <span class="f-fallback">{{value.description}}</span>
+                                    <div class="f-fallback">{{value.description}}</div>
                                     <div class="f-fallback mod-description">QTY/HR RATE - {{value.quantity}}</div>
                                     <div class="f-fallback mod-description" style="padding-top: 7px;">UNIT COST - {{value.unit_price}}Birr</div>
                                   </td>
@@ -547,31 +566,15 @@
                             </td>
                           </tr>
                         </table>
-                        <p>If you have any questions about this receipt, simply reply to this email or reach out to our <a href="{{support_url}}">support team</a> for help.</p>
+                        <p>If you have any questions about this invoice, simply reply to this email or reach out to our <a href="{{support_url}}">support team</a> for help.</p>
                         <p>Cheers,
                           <br>The Guya Team</p>
-                        <!-- Action -->
-                        <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                          <tr>
-                            <td align="center">
-                              <!-- Border based button
-           https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->
-                              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
-                                <tr>
-                                  <td align="center">
-                                    <a href="{{action_url}}" class="f-fallback button button--blue" target="_blank">Download as PDF</a>
-                                  </td>
-                                </tr>
-                              </table>
-                            </td>
-                          </tr>
-                        </table>
                         <!-- Sub copy -->
                         <table class="body-sub" role="presentation">
                           <tr>
                             <td>
-                              <p class="f-fallback sub"><strong>Need a printable copy for your records?</strong> You can <a href="{{action_url}}">download a PDF version</a>.</p>
-                              <p class="f-fallback sub">Moved recently? Have a new credit card? You can easily <a href="{{billing_url}}">update your billing information</a>.</p>
+                              <p class="f-fallback sub">If you’re having trouble with the button above, copy and paste the URL below into your web browser.</p>
+                              <p class="f-fallback sub">{{action_url}}</p>
                             </td>
                           </tr>
                         </table>
